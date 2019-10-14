@@ -11,9 +11,9 @@ struct Student {
   float gpa;
 };
 
-void add(vector<Student>* list);
-void print(vector<Student>* list);
-//void del(vector<Student> list);
+void add(vector<Student> &list);
+void print(vector<Student> list);
+void del(vector<Student> &list);
 
 int main() {
   bool running = true;
@@ -21,7 +21,7 @@ int main() {
   char cPrint[8] = "print";
   char cDel[8] = "delete";
   char cQuit[8] = "quit";
-  vector<Student>* list;
+  vector<Student> list;
   char command[8];
 
   cout << "Welcome to the student list!" << endl;
@@ -38,11 +38,10 @@ int main() {
       add(list);
     }
     else if (strcmp(cPrint, command) == 0) {
-      cout << "PRINT" << endl;
       print(list);
     }
     else if (strcmp(cDel, command) == 0) {
-      //  del(list);
+      del(list);
     }
     else if (strcmp(cQuit, command) == 0) {
       running = false;
@@ -54,7 +53,7 @@ int main() {
   return 0;
 }
 
-void add(vector<Student>* list) {
+void add(vector<Student> &list) {
   char firstI[10];
   char lastI[10];
   int idI;
@@ -72,23 +71,35 @@ void add(vector<Student>* list) {
   cin >> gpaI;
   cin.get();
 
-  Student a;
-  strcpy(a.first, firstI);
-  strcpy(a.last, lastI);
-  a.id = idI;
-  a.gpa = gpaI;
+  Student s;
+  strcpy(s.first, firstI);
+  strcpy(s.last, lastI);
+  s.id = idI;
+  s.gpa = gpaI;
   
-  list.push_back(a);
-  /* for (int i = 0; i < list.size(); i++) {
-     cout << "in loop" << endl;
-     cout << list[i].first << " " << list[i].last << ", " << list[i].id << ", " << list[i].gpa << endl;
-     }*/
+  list.push_back(s);
   cout << endl;
 }
-void print(vector<Student>* list) {
-  cout << "in function" << endl;
-  /* for (int i = 0; i < list.size(); i++) {
-    cout << "in loop" << endl;
-    cout << list[i].first << list[i].last << endl;
-    }*/
+void print(vector<Student> list) {
+  for (int i = 0; i < list.size(); i++) {
+    cout << list[i].first << " " << list[i].last << ", " << list[i].id << ", " << list[i].gpa << endl;
+  }
+  cout << endl;
+}
+
+void del(vector<Student> &list) {
+  int delID;
+  cout << "Enter the ID number of the student you would like to delete." << endl;
+  cin >> delID;
+  for (int i = 0; i < list.size(); i++) {
+    if (delID == list[i].id) {
+      cout << list[i].first << " " << list[i].last << " has been deleted." << endl;
+      list.erase(list.begin()+i);
+    }
+    else {
+      cout << "None of the students in the list have an ID number matching what was inputted." << endl;
+      cout << "If you want to delete a student, please type 'delete' again." << endl;
+    }
+  }
+    cout << endl;
 }
