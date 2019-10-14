@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -82,7 +83,7 @@ void add(vector<Student> &list) {
 }
 void print(vector<Student> list) {
   for (int i = 0; i < list.size(); i++) {
-    cout << list[i].first << " " << list[i].last << ", " << list[i].id << ", " << list[i].gpa << endl;
+    cout << list[i].first << " " << list[i].last << ", " << list[i].id << ", " << setprecision(3) << list[i].gpa << endl;
   }
   cout << endl;
 }
